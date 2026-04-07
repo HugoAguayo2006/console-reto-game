@@ -6,7 +6,7 @@ function RightControl() {
   return (
         <div className="w-[100px] h-[200px] border-4 rounded-r-2xl border-solid bg-red-500">
 
-            <div class="relative w-20 h-20">
+            <div class="absolute top-4 absolute left-1.5 relative w-20 h-20">
 
                 <button class="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center text-white text-xs">X</button>
 
@@ -18,6 +18,12 @@ function RightControl() {
 
 
                 <button class="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center text-white text-xs">A</button>
+            </div>
+
+            <div class="absolute top-6 absolute left-6 relative w-20 h-20">
+
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white text-xs"></div>
+
             </div>
         </div>
   )

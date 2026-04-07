@@ -3,7 +3,8 @@ const Screen=({pokemones})=>{
       <>
         <div className="w-[450px] h-[200px] border-t-4 border-b-4  border-solid">
             {pokemones?.map((pokemon) => (
-                <p>{pokemon.name}</p>
+                 <img src={pokemon?.sprites?.front_default} className="w-40 h-40" />
+                // <p>{pokemon.name}</p>
             ))}
 
         </div>
