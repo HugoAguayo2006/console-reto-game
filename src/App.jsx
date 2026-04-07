@@ -6,6 +6,7 @@ import RightControl from './components/RightControl';
 import useFetch from './hooks/useFetch';
 import { useEffect, useState } from 'react';
 
+
 function App() {
     const url =  "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
     const {data, loading, error} = useFetch(url)
@@ -26,8 +27,7 @@ function App() {
 
 
   return (
-    <div className="flex">
-      <h1 className="text-3xl font-bold underline"></h1>
+    <div className="flex items-center justify-center min-h-screen">
       <LeftControl />
       <Screen pokemones={pokemones} />
       <RightControl />
