@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 
 
 function App() {
-    const url =  "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
+    const url =  "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0"
     const {data, loading, error} = useFetch(url)
 
     const [pokemones, setPokemones] = useState([]);
@@ -38,8 +38,10 @@ function App() {
     const handleDirection = (direction) => {
 
       if(direction === 'right'){
-        setPosition((prev) => prev + 1);
-        setCurrent((current) => current +1);
+        if(current !== 99){
+          setPosition((prev) => prev + 1);
+          setCurrent((current) => current +1);
+        }
       }
       else if(direction === 'left'){
         if(current !== 0){
@@ -48,10 +50,17 @@ function App() {
         }
       }
       else if(direction === "top"){
-      
+        if(current !== 0 && current !== 1 && current !== 2){
+          setPosition((prev) => prev - 3);
+          setCurrent((current) => current - 3);
+        }
       }
       else { // down
-        setPosition((prev) => prev - 1);
+        console.log(current)
+        if(current !== 100 && current !== 99 && current !== 98){
+          setPosition((prev) => prev + 3);
+          setCurrent((current) => current + 3);
+        }
       }
     };
 

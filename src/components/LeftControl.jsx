@@ -16,10 +16,14 @@ function LeftControl({handleDirection}) {
 
           <div className="absolute top-5 absolute left-1.5 relative w-20 h-20">
 
-            <button className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center text-white text-xs">{'^'}</button>
+            <button 
+            onClick={() => handleDirection('top')} 
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center text-white text-xs">{'^'}</button>
 
 
-            <button className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center text-white text-xs">{'v'}</button>
+            <button 
+            onClick={() => handleDirection('down')} 
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center text-white text-xs">{'v'}</button>
 
 
             <button 
