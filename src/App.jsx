@@ -31,9 +31,9 @@ function App() {
 
     const [current,setCurrent] = useState(0)
 
-    
-    const[MyPokeSelection, setMyPokeSelection] = useState(0)
-    const[PcPokeSelection, setPcPokeSelection] = useState(0)
+
+  const [MyPokeSelection, setMyPokeSelection] = useState([])
+  const [PcPokeSelection, setPcPokeSelection] = useState([])
     
     const handleDirection = (direction) => {
 
@@ -57,7 +57,7 @@ function App() {
       }
       else { // down
         console.log(current)
-        if(current !== 100 && current !== 99 && current !== 98){
+        if(current !== 99 && current !== 98){
           setPosition((prev) => prev + 3);
           setCurrent((current) => current + 3);
         }
@@ -81,18 +81,20 @@ function App() {
 
     const handleSelection = () => {
       const selectPokemon = pokemones.filter((p) => p.id === position) 
+      console.log("el pokemon selecionado por mi es ", MyPokeSelection) //Imprimir posicion
+
       setMyPokeSelection(selectPokemon)
       computerSelection()
     }
 
-    console.log(MyPokeSelection.length)
-    console.log(PcPokeSelection.length)
+    console.log("my", MyPokeSelection.length , MyPokeSelection)
+    console.log("pc", PcPokeSelection.length, PcPokeSelection )
 
   return (
     <div className="flex items-center justify-center min-h-screen">
       <LeftControl handleDirection={handleDirection}/>
       {MyPokeSelection.length && PcPokeSelection.length ? (
-        <GameScreen/>
+        <GameScreen MyPokeSelection={MyPokeSelection} PcPokeSelection={PcPokeSelection}/>
       ):(
         <Screen pokemones={pokemones} position={position} />
       )}
