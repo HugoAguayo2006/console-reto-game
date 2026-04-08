@@ -1,10 +1,12 @@
 
 import './App.css';
 import Screen from  './components/Screen';
+import GameScreen from './components/GameScreen';
 import LeftControl from './components/LeftControl';
 import RightControl from './components/RightControl';
 import useFetch from './hooks/useFetch';
 import { useEffect, useState } from 'react';
+
 
 
 function App() {
@@ -25,12 +27,55 @@ function App() {
       getListPokemones();
     }, [data]);
 
+    const [position,setPosition] = useState(1)
+
+    
+    const[MyPokeSelection, setMyPokeSelection] = useState(0)
+    const[PcPokeSelection, setPcPokeSelection] = useState(0)
+    
+    const handleDirection = (direction) => {
+      console.log(direction)
+      if(direction === 'right'){
+        setPosition((prev) => prev + 1);
+      }
+      else {
+        setPosition((prev) => prev - 1);
+      }
+    };
+
+    
+    function getRandomInt(min, max) {
+      const minCeiled = Math.ceil(min);
+      const maxFloored = Math.floor(max);
+      return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+    }
+    
+    const computerSelection = () => {
+      const rnd = getRandomInt(1,100)
+
+      const pc = pokemones.filter((p) => p.id === rnd) 
+
+      setPcPokeSelection(pc)
+    }
+
+    const handleSelection = () => {
+      const selectPokemon = pokemones.filter((p) => p.id === position) 
+      setMyPokeSelection(selectPokemon)
+      computerSelection()
+    }
+
+    console.log(MyPokeSelection.length)
+    console.log(PcPokeSelection.length)
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <LeftControl />
-      <Screen pokemones={pokemones} />
-      <RightControl />
+      <LeftControl handleDirection={handleDirection}/>
+      {MyPokeSelection.length && PcPokeSelection.length ? (
+        <GameScreen/>
+      ):(
+        <Screen pokemones={pokemones} position={position} />
+      )}
+      <RightControl handleSelection={handleSelection}/>
     </div>
   );
 };
