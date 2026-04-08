@@ -29,16 +29,28 @@ function App() {
 
     const [position,setPosition] = useState(1)
 
+    const [current,setCurrent] = useState(0)
+
     
     const[MyPokeSelection, setMyPokeSelection] = useState(0)
     const[PcPokeSelection, setPcPokeSelection] = useState(0)
     
     const handleDirection = (direction) => {
-      console.log(direction)
+
       if(direction === 'right'){
         setPosition((prev) => prev + 1);
+        setCurrent((current) => current +1);
       }
-      else {
+      else if(direction === 'left'){
+        if(current !== 0){
+          setPosition((prev) => prev - 1);
+          setCurrent((current) => current -1);
+        }
+      }
+      else if(direction === "top"){
+      
+      }
+      else { // down
         setPosition((prev) => prev - 1);
       }
     };
