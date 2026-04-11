@@ -9,3 +9,16 @@
     border: 10px solid rgba(171, 168, 171, 0.333);
     border-radius: 10px;
 }
+
+.btn-poder {
+    background-color: #ff3b3b;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-poder:hover {
+    background-color: #e63232;
+}

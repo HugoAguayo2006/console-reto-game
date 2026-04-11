@@ -45,7 +45,7 @@ function Detalles({ pokemon , game}) {
                 {pokemon.moves.slice(0, 4).map((m, index) => (
                     <div key={index} className="flex gap-4">
                     <p>{m.move.name}</p>
-                    <p>{[cero, uno, dos, tres][index]}</p>
+                    <div>{[cero, uno, dos, tres][index]}</div>
                     </div>
                 ))}
                 </div>
