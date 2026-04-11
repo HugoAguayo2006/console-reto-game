@@ -35,6 +35,7 @@ function App() {
 
   const [MyPokeSelection, setMyPokeSelection] = useState([])
   const [PcPokeSelection, setPcPokeSelection] = useState([])
+  const [game, setgame] = useState(true)
   const currentPokemon = pokemones.find((p) => p.id === position)
     
     const handleDirection = (direction) => {
@@ -87,6 +88,7 @@ function App() {
 
       setMyPokeSelection(selectPokemon)
       computerSelection()
+      setgame(false)
     }
 
     console.log("my", MyPokeSelection.length , MyPokeSelection)
@@ -104,7 +106,7 @@ function App() {
         <RightControl handleSelection={handleSelection}/>
         </div>
           <div className="mt-4">
-          <Detalles pokemon={currentPokemon}/>
+          <Detalles pokemon={currentPokemon} game={game}/>
         </div>
     </div>
 
