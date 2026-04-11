@@ -4,6 +4,7 @@ import Screen from  './components/Screen';
 import GameScreen from './components/GameScreen';
 import LeftControl from './components/LeftControl';
 import RightControl from './components/RightControl';
+import Detalles from './components/Detalles';
 import useFetch from './hooks/useFetch';
 import { useEffect, useState } from 'react';
 
@@ -34,6 +35,7 @@ function App() {
 
   const [MyPokeSelection, setMyPokeSelection] = useState([])
   const [PcPokeSelection, setPcPokeSelection] = useState([])
+  const currentPokemon = pokemones.find((p) => p.id === position)
     
     const handleDirection = (direction) => {
 
@@ -91,15 +93,23 @@ function App() {
     console.log("pc", PcPokeSelection.length, PcPokeSelection )
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <LeftControl handleDirection={handleDirection}/>
-      {MyPokeSelection.length && PcPokeSelection.length ? (
-        <GameScreen MyPokeSelection={MyPokeSelection} PcPokeSelection={PcPokeSelection}/>
-      ):(
-        <Screen pokemones={pokemones} position={position} />
-      )}
-      <RightControl handleSelection={handleSelection}/>
+    < div className="flex flex-col items-center justify-center min-h-screen -mt-0">
+      <div className="flex items-center justify-center">
+        <LeftControl handleDirection={handleDirection}/>
+        {MyPokeSelection.length && PcPokeSelection.length ? (
+          <GameScreen MyPokeSelection={MyPokeSelection} PcPokeSelection={PcPokeSelection}/>
+        ):(
+          <Screen pokemones={pokemones} position={position} />
+        )}
+        <RightControl handleSelection={handleSelection}/>
+        </div>
+          <div className="mt-4">
+          <Detalles pokemon={currentPokemon}/>
+        </div>
     </div>
+
+
+
   );
 };
 

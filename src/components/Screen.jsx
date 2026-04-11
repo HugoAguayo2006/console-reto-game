@@ -1,3 +1,6 @@
+
+
+
 const Screen = ({ pokemones,position }) => {
   return (
     <>
