@@ -5,7 +5,7 @@ function GameScreen({ MyPokeSelection, PcPokeSelection }) {
   function getRandomInt(min, max) {
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);
-    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
   }
 
   const [vida, setVida] = useState(100);
@@ -14,32 +14,44 @@ function GameScreen({ MyPokeSelection, PcPokeSelection }) {
     const cero = 10;
     const uno = 20;
     const dos = 30;
-    const tres = 40;
+    const tres = 400;
 
-    const cuatro = getRandomInt(1, 40);
+    const cuatro   = getRandomInt(1, 40);
     const cinco = getRandomInt(1, 40);
     const seis = getRandomInt(1, 40);
     const siete = getRandomInt(1, 40);
 
     const damages = [cero, uno, dos, tres];
     const damagesenemigo = [cuatro, cinco, seis, siete];
+    const winnerMessage =
+      vidaenemigo === 0 ? 'Ganaste tu' : vida === 0 ? 'Gano el botardo' : '';
 
     const atacar = (index) => {
+    if (winnerMessage) return;
     const daño = damages[index];
     const dañoenemigo = damagesenemigo[index];
-      setVida((prev) => {
-          const nuevaVida = prev - daño;
-          return nuevaVida < 0 ? 0 : nuevaVida;
-        });
 
-      setVidaenemigo((prev) => {
-          const nuevaVida = prev - dañoenemigo;
-          return nuevaVida < 0 ? 0 : nuevaVida;
+    
+    setVidaenemigo((prev) => {
+        const nuevaVida = prev - daño;
+        return nuevaVida < 0 ? 0 : nuevaVida;
       });
+
+    setVida((prev) => {
+        const nuevaVida = prev - dañoenemigo;
+        return nuevaVida < 0 ? 0 : nuevaVida;
+    });
     };
 
   return (
-    <div className="w-[450px] h-[250px] overflow-y-auto border-y-4 border-solid flex justify-around items-center">
+    <div className="relative w-[450px] h-[250px] overflow-y-auto border-y-4 border-solid flex justify-around items-center">
+      {winnerMessage ? (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70">
+          <p className="text-white text-2xl font-bold text-center px-4">
+            {winnerMessage}
+          </p>
+        </div>
+      ) : null}
       
       <div className="flex flex-col items-center">
         {MyPokeSelection?.map((pokemon, index) => (
@@ -57,6 +69,7 @@ function GameScreen({ MyPokeSelection, PcPokeSelection }) {
                     className="btn-poder"
                     key={i}
                     onClick={() => atacar(i)}
+                    disabled={Boolean(winnerMessage)}
                   >
                     {m.move.name}
                 </button>

@@ -71,7 +71,7 @@ function App() {
     function getRandomInt(min, max) {
       const minCeiled = Math.ceil(min);
       const maxFloored = Math.floor(max);
-      return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+      return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); 
     }
     
     const computerSelection = () => {
@@ -84,7 +84,7 @@ function App() {
 
     const handleSelection = () => {
       const selectPokemon = pokemones.filter((p) => p.id === position) 
-      console.log("el pokemon selecionado por mi es ", MyPokeSelection) //Imprimir posicion
+      console.log("el pokemon selecionado por mi es ", MyPokeSelection) 
 
       setMyPokeSelection(selectPokemon)
       computerSelection()
