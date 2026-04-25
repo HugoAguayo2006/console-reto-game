@@ -19,7 +19,7 @@ function Detalles({ pokemon , game}) {
         <div className='card-container'>
         <div className="flex flex-col items-center">
             {pokemon ? (
-            <div className="flex flex-col items-center border-2">
+            <div className="flex flex-col items-center">
                 <p>{pokemon.name}</p>
                 <p># {pokemon.id}</p>
 
