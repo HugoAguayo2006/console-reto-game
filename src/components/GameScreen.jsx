@@ -24,7 +24,13 @@ function GameScreen({ MyPokeSelection, PcPokeSelection }) {
     const damages = [cero, uno, dos, tres];
     const damagesenemigo = [cuatro, cinco, seis, siete];
     const winnerMessage =
-      vidaenemigo === 0 ? 'Ganaste tu' : vida === 0 ? 'Gano el botardo' : '';
+      vida === 0 && vidaenemigo === 0
+        ? 'Empate'
+        : vidaenemigo === 0
+          ? 'Ganaste tu'
+          : vida === 0
+            ? 'Gano el botardo'
+            : '';
 
     const atacar = (index) => {
     if (winnerMessage) return;
