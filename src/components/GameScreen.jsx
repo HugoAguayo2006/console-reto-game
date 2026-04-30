@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './GameScreen.css'
 
 function GameScreen({ MyPokeSelection, PcPokeSelection }) {
 
@@ -23,6 +24,8 @@ function GameScreen({ MyPokeSelection, PcPokeSelection }) {
 
     const damages = [cero, uno, dos, tres];
     const damagesenemigo = [cuatro, cinco, seis, siete];
+    const vidaPercent = Math.max(0, Math.min(100, vida));
+    const vidaEnemigoPercent = Math.max(0, Math.min(100, vidaenemigo));
     const winnerMessage =
       vida === 0 && vidaenemigo === 0
         ? 'Empate'
@@ -50,26 +53,26 @@ function GameScreen({ MyPokeSelection, PcPokeSelection }) {
     };
 
   return (
-    <div className="relative w-[450px] h-[250px] overflow-y-auto border-y-4 border-solid flex justify-around items-center">
+    <div className="battle-screen">
       {winnerMessage ? (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70">
-          <p className="text-white text-2xl font-bold text-center px-4">
+        <div className="battle-result">
+          <p>
             {winnerMessage}
           </p>
         </div>
       ) : null}
       
-      <div className="flex flex-col items-center">
+      <div className="battle-player">
         {MyPokeSelection?.map((pokemon, index) => (
-          <div key={index} className="flex flex-col items-center border-2">
-            <p>{pokemon.name}</p>
+          <div key={index} className="battle-pokemon player-pokemon">
+            <p className="battle-name">{pokemon.name}</p>
 
             <img
               src={pokemon?.sprites?.back_default}
               alt={pokemon.name}
-              className="w-35 h-25"
+              className="battle-sprite player-sprite"
             />
-            <div>
+            <div className="battle-moves">
               {pokemon.moves.slice(0, 4).map((m, i) => (
                   <button
                     className="btn-poder"
@@ -83,21 +86,31 @@ function GameScreen({ MyPokeSelection, PcPokeSelection }) {
             </div>
           </div>
         ))}
-        <p>Vida: {vida}</p>
+        <div className="life-panel player-life">
+          <p>Vida: {vida}</p>
+          <div className="life-bar">
+            <span style={{ width: `${vidaPercent}%` }}></span>
+          </div>
+        </div>
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="battle-enemy">
         {PcPokeSelection?.map((pokemon, index) => (
-          <div key={index} className="flex flex-col items-center border-2">
-            <p>{pokemon.name}</p>
+          <div key={index} className="battle-pokemon enemy-pokemon">
+            <p className="battle-name">{pokemon.name}</p>
             <img
               src={pokemon?.sprites?.front_default}
               alt={pokemon.name}
-              className="w-35 h-35"
+              className="battle-sprite enemy-sprite"
             />
           </div>
         ))}
-        <p>Vida: {vidaenemigo}</p>
+        <div className="life-panel enemy-life">
+          <p>Vida: {vidaenemigo}</p>
+          <div className="life-bar">
+            <span style={{ width: `${vidaEnemigoPercent}%` }}></span>
+          </div>
+        </div>
       </div>
 
 

@@ -13,39 +13,42 @@ function Detalles({ pokemon , game}) {
     const uno = getRandomInt(1,100)
     const dos = getRandomInt(1,100)
     const tres = getRandomInt(1,100)
+    const damages = [cero, uno, dos, tres]
 
     return (
     game && (
         <div className='card-container'>
-        <div className="flex flex-col items-center">
+        <div className="details-content">
             {pokemon ? (
-            <div className="flex flex-col items-center">
-                <p>{pokemon.name}</p>
-                <p># {pokemon.id}</p>
+            <div className="details-card">
+                <div className="details-header">
+                    <p className="details-name">{pokemon.name}</p>
+                    <p className="details-id"># {pokemon.id}</p>
+                </div>
 
-                {pokemon.types.map((t, index) => (
-                <p key={index}>{t.type.name}</p>
-                ))}
+                <div className="details-types">
+                    {pokemon.types.map((t, index) => (
+                    <span key={index}>{t.type.name}</span>
+                    ))}
+                </div>
 
-                <div className="flex items-center justify-center">
+                <div className="details-sprites">
                 <img
                     src={pokemon?.sprites?.front_default}
                     alt={pokemon.name}
-                    className="w-35 h-35"
                 />
                 <img
                     src={pokemon?.sprites?.back_default}
                     alt={pokemon.name}
-                    className="w-35 h-35"
                 />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                MOVES
+                <div className="moves-list">
+                <p className="moves-title">MOVES</p>
                 {pokemon.moves.slice(0, 4).map((m, index) => (
-                    <div key={index} className="flex gap-4">
+                    <div key={index} className="move-row">
                     <p>{m.move.name}</p>
-                    <div>{[cero, uno, dos, tres][index]}</div>
+                    <span>{damages[index]}</span>
                     </div>
                 ))}
                 </div>
